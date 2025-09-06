@@ -1,7 +1,7 @@
 # Actividad 1: Introducción devops, devsecops
 
-Nombre: Anthony Aldair Carlos Ramon
-Fecha: 05/09/2025
+**Nombre:** Anthony Aldair Carlos Ramon\
+**Fecha:** 05/09/2025
 
 ## 4.1 DevOps vs Cascada
 
