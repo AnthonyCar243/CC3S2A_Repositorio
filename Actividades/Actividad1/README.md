@@ -84,15 +84,15 @@ Efectos negativos:
 - Los hallazgos fuerzan re-trabajos sobre código ya “cerrado”, retrasando lanzamientos.
 - Al no estar integrada desde el inicio, se repiten **degradaciones** por los mismos patrones inseguros.
 
-### Principios y beneficios de DevOps (CI/CD, automatización, colaboración; Agile como precursor)
+## 4.3 Principios y beneficios de DevOps (CI/CD, automatización, colaboración; Agile como precursor)
 
-**CI y CD**
+### CI y CD
 
 - **Continuous Integration (CI):** los desarrolladores integran **pequeños cambios frecuentes** al repositorio principal. Cada commit dispara **pruebas automatizadas cercanas al código** (unitarias, de integración rápida), lo que permite detectar errores casi en tiempo real.
 - **Continuous Delivery/Deployment (CD):** los cambios validados pasan por pruebas más amplias (funcionales, de performance, seguridad) y, si aprueban, se **promueven automáticamente** a entornos superiores (staging, producción).
 - **Colaboración Dev–Ops:** CI/CD elimina silos porque los equipos de Dev, QA y Ops trabajan sobre el mismo pipeline. La automatización asegura que la calidad y la operabilidad se validen de manera conjunta, no como fases separadas.
 
-**Cómo Agile alimenta decisiones del pipeline**
+### Cómo Agile alimenta decisiones del pipeline
 
 - **Reuniones diarias (daily stand-ups):** permiten que el equipo identifique bloqueos y decida si un cambio debe **avanzar por el pipeline** o esperar hasta resolver un riesgo.
 - **Retrospectivas:** ayudan a revisar métricas y experiencias de despliegues anteriores, decidiendo mejoras en el pipeline (por ejemplo, agregar una prueba de carga o ajustar reglas de rollback automático).
@@ -100,7 +100,7 @@ Efectos negativos:
 
 En ambos casos, el **_feedback_ humano** de Agile guía la **automatización técnica** del pipeline: qué se promueve, qué se bloquea y cómo se mejora.
 
-**Indicador observable de colaboración Dev–Ops**
+### Indicador observable de colaboración Dev–Ops
 
 **Tiempo desde que un Pull Request está listo hasta que se despliega en entorno de pruebas.**\
 Mide qué tan coordinados están Dev y Ops. Si el tiempo baja, significa menos colas y más colaboración.
