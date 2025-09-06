@@ -1,0 +1,2 @@
+- Abiona, O. O., Oladapo, O. J., Modupe, O. T., Oyeniran, O. C., Adewusi, A. O., & Komolafe, A. M. (2024). The emergence and importance of DevSecOps: Integrating and reviewing security practices within the DevOps pipeline. World Journal of Advanced Engineering Technology and Sciences, 11(2), 127-133.
+- Maharao, C. S., & Bhise, A. T. (2023). COMPARISON OF AGILE VS WATERFALL VS DEVOPS METHODOLOGIES IN SOFTWARE PROJECT SUCCESS. International Journal of Research Science and Management, 10(12), 24-39
