@@ -9,7 +9,7 @@
 
 **Feedback continuo**
 
-- **Cascada:** el cliente o usuario solo da retroalimentación(_feedback_) al final del proyecto. Si hay errores o malentendidos, se descubren muy tarde, alto riesgo y costo de corrección.
+- **Cascada:** el cliente o usuario solo da retroalimentación (_feedback_) al final del proyecto. Si hay errores o malentendidos, se descubren muy tarde, alto riesgo y costo de corrección.
 - **DevOps:** cada despliegue, prueba automatizada y monitoreo genera _feedback_ inmediato. Los problemas se detectan temprano y se corrigen rápido.
  Esto acelera el desarrollo porque no se espera meses para validar.
 
@@ -40,7 +40,7 @@ En este tipo de proyectos, el software debe cumplir con **certificaciones regula
 **Seguridad y criticidad del sistema**
 
 - Verificable porque el fallo del software puede tener consecuencias de vida o muerte.
-- Se exige validación formal de cada fase antes de avanzar → el modelo en cascada minimiza ambigüedad y asegura que nada quede sin documentar.
+- Se exige validación formal de cada fase antes de avanzar, el modelo en cascada minimiza ambigüedad y asegura que nada quede sin documentar.
 
 
 **Trade-offs (compromisos)**
@@ -48,6 +48,62 @@ En este tipo de proyectos, el software debe cumplir con **certificaciones regula
 **Velocidad vs Conformidad/Seguridad**
 
 - Con cascada, el desarrollo es **más lento**, ya que cada fase debe completarse y documentarse rigurosamente antes de avanzar. Pero, se gana en **conformidad regulatoria y seguridad**, lo que es prioritario en este contexto.
+
+## 4.2 Ciclo tradicional de dos pasos y silos (limitaciones y anti-patrones)
+
+### Limitaciones del ciclo "construcción -> operación" sin integración continua
+
+**Grandes lotes de cambios**
+
+- En lugar de integrar cambios pequeños y probados, el software avanza en grandes paquetes.
+- Problema: el costo de integración aumenta, porque mezclar mucho código de golpe genera conflictos, errores ocultos y retrabajos extensos.
+
+**Colas de defectos acumuladas**
+
+- Los errores se descubren recién en pruebas finales o en producción.
+- Problema: aparecen largas colas de bugs pendientes, lo que retrasa la entrega y genera incertidumbre sobre la calidad.
+
+### Anti-patrones y cómo agravan incidentes
+
+**"Throw over the wall" (tirar el trabajo "por encima del muro")**
+
+Ocurre cuando desarrollo finaliza un producto y lo entrega como handoff a operaciones o QA sin contexto ni colaboración.
+
+Efectos negativos:
+
+- **Asimetrías de información:** operaciones recibe código sin entender bien cómo funciona ni qué riesgos trae.
+- **Mayor MTTR (Mean Time to Recovery):** al ocurrir un incidente, los operadores tardan más en resolverlo porque dependen de volver a preguntar al equipo de desarrollo.
+- Resultado: degradaciones repetitivas y retrabajos costosos.
+
+**Seguridad como auditoría tardía**
+
+La revisión de seguridad se hace al final del ciclo, como un trámite previo a producción.
+
+Efectos negativos:
+- Se descubren vulnerabilidades muy tarde, lo que multiplica el **costo de integración tardía** (arreglar un bug de seguridad en prod es más caro y lento).
+- Los hallazgos fuerzan re-trabajos sobre código ya “cerrado”, retrasando lanzamientos.
+- Al no estar integrada desde el inicio, se repiten **degradaciones** por los mismos patrones inseguros.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
