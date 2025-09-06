@@ -120,9 +120,55 @@ Cómo recolectarlo sin herramientas de paga:
 
 No hace falta pagar herramientas, basta con usar logs del repositorio y del pipeline, que ya guardan los eventos con fecha y hora.
 
+## 4.4 Evolución a DevSecOps (seguridad desde el inicio: SAST/DAST; cambio cultural)
 
+### Diferencia entre SAST y DAST
 
+**SAST (Static Application Security Testing):**
 
+- Analiza el código fuente, bytecode o binarios sin ejecutar la aplicación.
+- Se usa en etapas tempranas del pipeline (fase de build o commit).
+- Detecta fallos como inyecciones SQL en el código, uso inseguro de librerías, etc.
+- Ventaja: barato de correr temprano, evita que los defectos pasen a fases posteriores.
+
+**DAST (Dynamic Application Security Testing):**
+
+- Analiza la aplicación en ejecución, como si fuera un atacante externo.
+- Se ubica en etapas de pruebas o staging del pipeline, antes de desplegar a producción.
+- Detecta fallos en ejecución: XSS, validaciones insuficientes, configuraciones incorrectas.
+- Ventaja: prueba la aplicación real, no solo el código.
+
+### Gate mínimo de seguridad
+
+Un _gate_ es un punto de control dentro del _pipeline_ donde se ejecutan validaciones automáticas (como análisis de vulnerabilidades, escaneo de dependencia, etc.) para asegurar que el software cumple con los requisitos de seguridad antes de avanzar a la siguiente fase(staging, producción) o ser liberado. Es una política de “pasa/no pasa” en el _pipeline_. Sirve para detener software inseguro antes de que llegue a los usuarios.\ 
+Ejemplo con dos **umbrales cuantitativos**:
+
+- **Bloqueo duro:** Cualquier hallazgo de severidad crítica en componentes expuestos (servicios públicos o APIs) bloquea la promoción a staging/producción.
+- **Umbral de cobertura:** La cobertura mínima de pruebas de seguridad automatizadas (SAST + DAST) debe ser al menos 80% del código y endpoints críticos.
+
+### Política de excepción
+
+Cuando el equipo **no puede resolver inmediatamente un hallazgo** (por dependencia externa o limitaciones técnicas), se documenta:
+
+- **Caducidad:** máximo 30 días antes de volver a revisarlo.
+- **Responsable:** líder técnico del servicio afectado.
+- **Plan de corrección:** issue en el backlog con pasos definidos (ejemplo: actualizar dependencia vulnerable a versión 3.2.1).
+
+Esto asegura que la excepción no se “olvide” indefinidamente.
+
+### ¿Cómo evitar el "teatro de seguridad" (cumplir checklist sin reducir riesgo)? 
+
+Señales de eficacia reales
+
+**Disminución de hallazgos repetidos:**
+
+- Si el mismo tipo de vulnerabilidad deja de reaparecer en cada release, significa que el equipo está **aprendiendo y corrigiendo de raíz**.
+- Medición: comparar reportes de SAST/DAST entre releases, con el fin de contar vulnerabilidades de la misma categoría (ej. XSS, SQLi).
+
+**Reducción en tiempo de remediación (MTTR de vulnerabilidades):**
+
+- No basta con encontrarlas, hay que cerrarlas más rápido.
+- Medición: registrar fecha de detección vs fecha de cierre en issues, con el fin de calcular el promedio por severidad (críticas, altas, medias).
 
 
 
