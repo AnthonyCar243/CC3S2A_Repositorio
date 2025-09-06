@@ -170,6 +170,44 @@ Señales de eficacia reales
 - No basta con encontrarlas, hay que cerrarlas más rápido.
 - Medición: registrar fecha de detección vs fecha de cierre en issues, con el fin de calcular el promedio por severidad (críticas, altas, medias).
 
+## 4.5 CI/CD y estrategias de despliegue (sandbox, canary, azul/verde)
+
+### Estrategia elegida: Canary 
+
+Justificación:
+
+- Es un servicio sensible (si falla, los usuarios no pueden entrar).
+- El _canary_ permite liberar la nueva versión solo a un **pequeño porcentaje de usuarios reales**, mientras el resto sigue usando la versión estable.
+- Si aparecen errores o anomalías, se puede **abortar rápido** antes de afectar a toda la base de usuarios.
+
+### Tabla de riesgos vs. mitigaciones
+
+| Riesgo | Mitigación |
+| --- | --- |
+| **Regresión funcional** (la nueva versión rompe compatibilidad con clientes) | Validación de contrato (_contract testing_) y pruebas automáticas de integración antes de promover el _canary_. |
+| **Costo operativo del doble despliegue** (dos versiones corriendo en paralelo)| Limitar tiempo de convivencia: máximo 24h de prueba antes de decidir promover o abortar. |
+| **Manejo de sesiones activas** (usuarios logueados pierden estado)| Usar _session draining_ (dejar expirar sesiones en la versión vieja) y compatibilidad de esquemas en tokens/cookies. |
+
+### KPI primario
+
+- **KPI:** tasa de errores 5xx en el servicio de autenticación.
+- **Umbral:** ≤ 0.5% de solicitudes con error 5xx.
+- **Ventana de observación:** durante los primeros 30 minutos de exposición al 5% del tráfico real.
+- Regla: si se supera ese umbral, entonces se hace _rollback_ automático.
+
+### ¿Qué pasa si el KPI técnico está bien, pero cae una métrica de producto?
+
+Técnicamente, el servicio no da errores (5xx dentro del umbral, latencia aceptable). Pero la **conversión de _login_** → compra baja 20% después del despliegue.
+
+Esto ocurre porque:
+- Los **KPIs técnicos** aseguran que la aplicación “funciona”.
+- Las **métricas de producto** aseguran que los usuarios logran su objetivo (experiencia).
+- Ejemplo: un bug en la UI o un cambio en la UX puede no generar errores técnicos, pero sí afectar la conversión o el _engagement_.
+
+Por eso, en un _gate_ de promoción **deben coexistir métricas técnicas y de producto**: una cuida la estabilidad del sistema y la otra cuida el impacto en el negocio/usuario.
+
+
+
 
 
 
