@@ -80,9 +80,49 @@ Efectos negativos:
 La revisión de seguridad se hace al final del ciclo, como un trámite previo a producción.
 
 Efectos negativos:
-- Se descubren vulnerabilidades muy tarde, lo que multiplica el **costo de integración tardía** (arreglar un bug de seguridad en prod es más caro y lento).
+- Se descubren vulnerabilidades muy tarde, lo que multiplica el **costo de integración tardía** (arreglar un bug de seguridad en producción es más caro y lento).
 - Los hallazgos fuerzan re-trabajos sobre código ya “cerrado”, retrasando lanzamientos.
 - Al no estar integrada desde el inicio, se repiten **degradaciones** por los mismos patrones inseguros.
+
+### Principios y beneficios de DevOps (CI/CD, automatización, colaboración; Agile como precursor)
+
+**CI y CD**
+
+- **Continuous Integration (CI):** los desarrolladores integran **pequeños cambios frecuentes** al repositorio principal. Cada commit dispara **pruebas automatizadas cercanas al código** (unitarias, de integración rápida), lo que permite detectar errores casi en tiempo real.
+- **Continuous Delivery/Deployment (CD):** los cambios validados pasan por pruebas más amplias (funcionales, de performance, seguridad) y, si aprueban, se **promueven automáticamente** a entornos superiores (staging, producción).
+- **Colaboración Dev–Ops:** CI/CD elimina silos porque los equipos de Dev, QA y Ops trabajan sobre el mismo pipeline. La automatización asegura que la calidad y la operabilidad se validen de manera conjunta, no como fases separadas.
+
+**Cómo Agile alimenta decisiones del pipeline**
+
+- **Reuniones diarias (daily stand-ups):** permiten que el equipo identifique bloqueos y decida si un cambio debe **avanzar por el pipeline** o esperar hasta resolver un riesgo.
+- **Retrospectivas:** ayudan a revisar métricas y experiencias de despliegues anteriores, decidiendo mejoras en el pipeline (por ejemplo, agregar una prueba de carga o ajustar reglas de rollback automático).
+
+
+En ambos casos, el **_feedback_ humano** de Agile guía la **automatización técnica** del pipeline: qué se promueve, qué se bloquea y cómo se mejora.
+
+**Indicador observable de colaboración Dev–Ops**
+
+**Tiempo desde que un Pull Request está listo hasta que se despliega en entorno de pruebas.**\
+Mide qué tan coordinados están Dev y Ops. Si el tiempo baja, significa menos colas y más colaboración.
+
+Cómo recolectarlo sin herramientas de paga:
+
+1.	Metadatos de PRs (GitHub/GitLab):
+    - Fecha/hora en que el PR fue marcado como “ready to merge”.
+    - Fecha/hora en que el merge generó un build en CI.
+
+2. Registros de despliegue (logs de Jenkins, GitHub Actions, GitLab CI, etc.):
+    - Timestamp del despliegue al entorno de pruebas.
+
+3. Comparación de timestamps:
+    - Restar ambos tiempos para cada PR.
+    - Guardar los resultados en una hoja de cálculo o bitácora.
+
+No hace falta pagar herramientas, basta con usar logs del repositorio y del pipeline, que ya guardan los eventos con fecha y hora.
+
+
+
+
 
 
 
